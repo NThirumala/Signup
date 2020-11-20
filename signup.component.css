@@ -1,0 +1,7 @@
+.valign{
+    display: flex;
+    align-items: center;
+}
+.btnmargin{
+    margin-right: 5px;
+}

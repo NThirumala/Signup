@@ -1,0 +1,67 @@
+<form (ngSubmit)="saveEmployee()" [formGroup] = "employeeForm">
+    <div class = "container col-6">
+        <div class= "card">
+            <div class= "card-header bg-primary">
+               <h3 class="card-title">SignUP</h3>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="form-group">
+                        <label for="name" class= "control-label" >User Name :</label>
+                        <input type="text" name="name" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" formControlName="name" id="name" class="form-control"/>
+                        <span class="help-block" *ngIf= "employeeForm.get('name').errors?.required && employeeForm.get('name').touched">
+                                Username Required.
+                        </span>
+                        <span class="help-block" *ngIf= "employeeForm.get('name').errors?.pattern && employeeForm.get('name').touched">
+                            Username is EMail ID.
+                    </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class= "control-label">Password :</label>
+                        <input type="text" name="password" formControlName="password" id="password" class="form-control"/>
+                        <span class="help-block" aria-placeholder="+XXXXXXXXXX" *ngIf= "employeeForm.get('password').errors?.required && employeeForm.get('password').touched">
+                                Password Required.
+                        </span>
+                        <span class="help-block" *ngIf= "employeeForm.get('name').errors?.pattern && employeeForm.get('name').touched">
+                            Username Required give correct amil ID.
+                    </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpassword" class= "control-label">Confirm Password :</label>
+                        <input type="text" appCompare="password" formControlName="cpassword"name="cpassword" id="cpassword" class="form-control"/>
+                        <span class="help-block" *ngIf= "employeeForm.get('cpassword').errors?.required && employeeForm.get('cpassword').touched">
+                           Confirm Password Required.
+                    </span>
+                    <span class="help-block" *ngIf= "employeeForm.get('cpassword').errors?.notEquals && employeeForm.get('cpassword').touched">
+                        Confirm Password must be same as Password.
+                 </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"  class= "control-label">Phone :</label>
+                        <input type="text" name="phone" pattern="^[+0-9]+$" formControlName="phone" required id="phone" class="form-control"/>
+                        <span class="help-block" *ngIf= "employeeForm.get('phone').errors?.required && employeeForm.get('phone').touched">
+                        Phone number Required.
+                        </span>
+                        <span class="help-block" *ngIf= "!employeeForm.get('phone').errors?.required && employeeForm.get('phone').touched && employeeForm.get('phone').errors?.pattern">
+                            Phone number Invalid.
+                        </span>
+                        <span class="help-block" *ngIf="employeeForm.get('phone').errors?.maxlength">
+                            Phone number must contain 10 digits.
+                        </span>
+                    </div>
+                    <div class = "row">
+                        <div class="col-4">
+                        
+                        </div>
+                        <div class="col-8">
+                            <button type="button" class="btn btn-outline-danger btnmargin" (click) = "clear()">Clear</button>
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<app-details [cdata] = "data" ></app-details>
+<!-- {{employeeForm.value | json}} -->
